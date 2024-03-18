@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Import the font directly using the link tag -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+
+    <title>Validate Credit Card</title>
+    <style>
+        /* Add any custom styles here */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Enter Your Credit Card Details</h1>
+    <form action="#" method="post" onsubmit="return validateCard()">
+        <label for="cardtype">Enter Card Type</label>
+        <select name="cardtype" id="cardtype">
+            <option value="mastercard">Master Card</option>
+            <option value="visa">Visa</option>
+            <option value="amex">American Express</option>
+        </select>
+        <br>
+        <label for="cardnumber">Enter You Card Number </label>
+        <input type="text" id="cardnumber" name="cardnumber" required>
+
+        <br>
+        <input type="submit" value="Submit Details">
+    </form>
+    <script>
+        function validateCard() {
+            var cardType = document.getElementById("cardtype").value;
+            var cardNumber = document.getElementById("cardnumber").value.trim();
+            if (!cardType) {
+                window.alert("Please select card type");
+                return false;
+            }
+            if (cardType === "mastercard") {
+                if (cardNumber.length === 16 && parseInt(cardNumber.substring(0, 2)) >= 51 && parseInt(cardNumber.substring(0, 2)) <= 55) {
+                    window.alert("Valid Master Card");
+                    return true;
+                }
+            }
+            else if (cardType === "visa") {
+                if ((cardNumber.length === 13 || cardNumber.length === 16) && cardNumber.startsWith("4")) {
+                    window.alert("Valid Visa Card");
+                    return true;
+                }
+            }
+            else if (cardType === "amex") {
+                if (cardNumber.length === 15 && (cardNumber.startsWith("34") || cardNumber.startsWith("37"))) {
+                    window.alert("Valid American Express Card");
+                    return true;
+                }
+            }
+
+            window.alert("The card number " + cardNumber + " is not the valid " + cardType);
+            return false;
+        }
+    </script>
+
+</html>
